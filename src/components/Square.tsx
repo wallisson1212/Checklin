@@ -38,9 +38,7 @@ const Square: React.FC<SquareProps> = ({
         </div>
       )}
       {isValidMove && !isCapture && (
-        <div className="move-indicator-container">
-          <div className="move-indicator"></div>
-        </div>
+        <div className="move-indicator"></div>
       )}
       {isCapture && (
         <div className="capture-ring"></div>
