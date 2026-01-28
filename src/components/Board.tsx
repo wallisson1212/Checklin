@@ -25,6 +25,7 @@ const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'méd
   const [isAIThinking, setIsAIThinking] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [timeExpired, setTimeExpired] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(timeLimit * 60);
 
   const playerColorEnum = playerColor === 'white' ? Color.WHITE : Color.BLACK;
   const aiColor = playerColorEnum === Color.WHITE ? Color.BLACK : Color.WHITE;
@@ -35,15 +36,17 @@ const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'méd
       return;
     }
 
-    let remainingTime = timeLimit * 60;
     const timer = setInterval(() => {
-      remainingTime -= 1;
-      if (onTimeUpdate) {
-        onTimeUpdate(remainingTime);
-      }
-      if (remainingTime <= 0) {
-        setTimeExpired(true);
-      }
+      setRemainingTime(prev => {
+        const newTime = prev - 1;
+        if (onTimeUpdate) {
+          onTimeUpdate(newTime);
+        }
+        if (newTime <= 0) {
+          setTimeExpired(true);
+        }
+        return newTime;
+      });
     }, 1000);
 
     return () => clearInterval(timer);
