@@ -135,25 +135,6 @@ const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'méd
 
   return (
     <div className="board-container">
-      <div className="board-header">
-        <div className="header-left">
-          <h2 className="game-title">♔ CHECKLINE ♚</h2>
-        </div>
-        <div className="header-center">
-          <div className="status-info">
-            <div className={`player-indicator ${currentPlayer === Color.WHITE ? 'white-turn' : 'black-turn'}`}>
-              {currentPlayer === Color.WHITE ? '♔ Peças Brancas' : '♚ Peças Pretas'}
-            </div>
-            {gameStatus.isCheck && (
-              <div className="check-warning">⚠️ XEQUE!</div>
-            )}
-          </div>
-        </div>
-        <div className="header-right">
-          <div className="difficulty-badge">{difficulty}</div>
-        </div>
-      </div>
-
       <div className="board">
         {playerColor === 'black' 
           ? board.slice().reverse().map((row, y) =>
