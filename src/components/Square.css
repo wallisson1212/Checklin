@@ -27,8 +27,8 @@
 }
 
 .move-indicator {
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   background-color: #333;
   border-radius: 50%;
   opacity: 0.8;
