@@ -452,17 +452,13 @@
   }
 
   .selected {
-    box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.8);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
   }
 
   .valid-move {
-    width: 18%;
-    height: 18%;
   }
 
   .capture-indicator {
-    width: 65%;
-    height: 65%;
   }
 
   /* Modal responsivo */
