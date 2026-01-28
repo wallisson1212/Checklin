@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: false,
-    cssCodeSplit: true
+    minify: 'esbuild',
+    cssMinify: false
   }
 })
