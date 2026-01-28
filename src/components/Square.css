@@ -23,7 +23,7 @@
 }
 
 .square.valid-move {
-  box-shadow: inset 0 0 15px rgba(200, 200, 100, 0.5);
+  background-color: rgba(200, 200, 100, 0.2);
 }
 
 .move-indicator {
@@ -41,7 +41,7 @@
 }
 
 .square.capture {
-  box-shadow: inset 0 0 15px rgba(200, 100, 100, 0.5);
+  background-color: rgba(200, 100, 100, 0.2);
 }
 
 .capture-ring {
