@@ -1,7 +1,8 @@
 .home-page {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
 }
 
 /* Primeira camada - Peças brancas caindo rápido */
