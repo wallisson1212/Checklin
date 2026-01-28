@@ -64,7 +64,6 @@
   user-select: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
-  animation: popIn 0.2s ease;
   position: relative;
   z-index: 2;
 }
@@ -81,14 +80,9 @@
 
 @keyframes popIn {
   0% {
-    transform: scale(0.8);
     opacity: 0;
   }
-  50% {
-    transform: scale(1.1);
-  }
   100% {
-    transform: scale(1);
     opacity: 1;
   }
 }
@@ -124,7 +118,7 @@
   }
 
   .square:hover {
-    transform: scale(1.01);
+    opacity: 0.95;
   }
 }
 
