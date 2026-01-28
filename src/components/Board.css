@@ -7,7 +7,16 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   position: relative;
-  overflow: hidden;
+  overflow: auto;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .board-container {
+    gap: 20px;
+    padding: 10px;
+    min-height: auto;
+  }
 }
 
 .board {
@@ -23,6 +32,23 @@
   background-color: #f0d9b5;
   border-radius: 0;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .board {
+    width: 95vw;
+    max-width: 100%;
+    border: 4px solid #8b6914;
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    width: 100%;
+    max-width: 100%;
+    border: 3px solid #8b6914;
+  }
 }
 
 .board {
