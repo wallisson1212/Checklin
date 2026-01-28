@@ -6,7 +6,6 @@
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: all 0.2s ease;
   border: 2px solid transparent;
   overflow: visible;
 }
