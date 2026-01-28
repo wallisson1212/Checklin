@@ -64,7 +64,6 @@
   user-select: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
-  position: relative;
   z-index: 2;
 }
 
