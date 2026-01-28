@@ -7,6 +7,44 @@ import './App.css';
 
 type GameState = 'home' | 'setup' | 'playing';
 
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, ErrorBoundaryState> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error caught:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="app" style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ color: '#d4af37', textAlign: 'center', padding: '20px' }}>
+            <h1>Oops! Algo deu errado</h1>
+            <p>{this.state.error?.message}</p>
+            <button onClick={() => window.location.reload()} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>
+              Recarregar página
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 const App: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>('home');
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(null);
@@ -34,37 +72,39 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app">
-      {gameState === 'home' && (
-        <Home onStartGame={handleStartGame} />
-      )}
-      {gameState === 'setup' && (
-        <GameSetup 
-          onStartWithSettings={handleStartWithSettings}
-          onBack={handleBackToHome}
-        />
-      )}
-      {gameState === 'playing' && gameSettings && (
-        <div className="game-container">
-          <main>
-            <Board playerColor={gameSettings.playerColor} difficulty={gameSettings.difficulty} timeLimit={gameSettings.timeLimit} onTimeUpdate={setRemainingTime} />
-          </main>
-          <footer className="app-footer">
-            <div className="footer-content">
-              <h1>♔ Checkline ♚</h1>
-              <div className="footer-controls">
-                <div className="time-info">
-                  ⏱️ {formatTime(remainingTime)}
+    <ErrorBoundary>
+      <div className="app">
+        {gameState === 'home' && (
+          <Home onStartGame={handleStartGame} />
+        )}
+        {gameState === 'setup' && (
+          <GameSetup 
+            onStartWithSettings={handleStartWithSettings}
+            onBack={handleBackToHome}
+          />
+        )}
+        {gameState === 'playing' && gameSettings && (
+          <div className="game-container">
+            <main>
+              <Board playerColor={gameSettings.playerColor} difficulty={gameSettings.difficulty} timeLimit={gameSettings.timeLimit} onTimeUpdate={setRemainingTime} />
+            </main>
+            <footer className="app-footer">
+              <div className="footer-content">
+                <h1>♔ Checkline ♚</h1>
+                <div className="footer-controls">
+                  <div className="time-info">
+                    ⏱️ {formatTime(remainingTime)}
+                  </div>
+                  <button className="back-btn" onClick={handleBackToHome}>
+                    ← Voltar
+                  </button>
                 </div>
-                <button className="back-btn" onClick={handleBackToHome}>
-                  ← Voltar
-                </button>
               </div>
-            </div>
-          </footer>
-        </div>
-      )}
-    </div>
+            </footer>
+          </div>
+        )}
+      </div>
+    </ErrorBoundary>
   );
 };
 
