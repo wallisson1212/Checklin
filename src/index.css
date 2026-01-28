@@ -18,6 +18,8 @@ body {
   min-height: 100vh;
   color: #f0d9b5;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 html, body, #root {
@@ -25,7 +27,20 @@ html, body, #root {
   height: 100%;
 }
 
-/* Melhorias para toque */
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.init-loader {
+  color: #d4af37;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Button minimum sizes for touch */
 button {
   min-height: 44px;
   min-width: 44px;
