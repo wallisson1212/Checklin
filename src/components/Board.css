@@ -24,10 +24,10 @@
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   gap: 0;
-  width: 90vw;
-  height: 90vw;
-  max-width: 640px;
-  max-height: 640px;
+  width: 95vw;
+  height: 95vw;
+  max-width: 800px;
+  max-height: 800px;
   border: 8px solid #8b6914;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   background-color: #f0d9b5;
