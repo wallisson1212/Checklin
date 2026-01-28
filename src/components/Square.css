@@ -95,12 +95,12 @@
 }
 
 .square:hover {
-  transform: scale(1.02);
+  opacity: 0.9;
 }
 
 .square.valid-move:hover,
 .square.capture:hover {
-  transform: scale(1.05);
+  opacity: 0.95;
   box-shadow: inset 0 0 20px rgba(200, 200, 100, 0.7);
 }
 @media (max-width: 1024px) {
@@ -141,7 +141,7 @@
   }
 
   .square:hover {
-    transform: scale(1);
+    opacity: 0.95;
   }
 
   .square.valid-move:hover {
