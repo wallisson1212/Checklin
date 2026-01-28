@@ -27,6 +27,13 @@ const App: React.FC = () => {
     setGameSettings(null);
   };
 
+  const handleRestartGame = () => {
+    if (gameSettings) {
+      setRemainingTime(gameSettings.timeLimit * 60);
+      setGameState('playing');
+    }
+  };
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -47,7 +54,14 @@ const App: React.FC = () => {
       {gameState === 'playing' && gameSettings && (
         <div className="game-container">
           <main>
-            <Board playerColor={gameSettings.playerColor} difficulty={gameSettings.difficulty} timeLimit={gameSettings.timeLimit} onTimeUpdate={setRemainingTime} />
+            <Board 
+              playerColor={gameSettings.playerColor} 
+              difficulty={gameSettings.difficulty} 
+              timeLimit={gameSettings.timeLimit} 
+              onTimeUpdate={setRemainingTime}
+              onBack={handleBackToHome}
+              onRestart={handleRestartGame}
+            />
           </main>
           <footer className="app-footer">
             <div className="footer-content">

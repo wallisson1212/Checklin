@@ -10,9 +10,11 @@ interface BoardProps {
   difficulty?: 'très-fácil' | 'fácil' | 'médio' | 'difícil' | 'muito-difícil' | 'mestre';
   timeLimit?: number;
   onTimeUpdate?: (remainingSeconds: number) => void;
+  onBack?: () => void;
+  onRestart?: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'médio', timeLimit = 10, onTimeUpdate }) => {
+const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'médio', timeLimit = 10, onTimeUpdate, onBack, onRestart }) => {
   const [engine] = useState(() => new ChessEngine(initializeBoard()));
   const [ai] = useState(() => new ChessAI(difficulty));
   const [board, setBoard] = useState(engine.getBoard());
@@ -207,6 +209,14 @@ const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'méd
                 <span className="stat-value">{difficulty}</span>
               </div>
             </div>
+            <div className="modal-buttons">
+              <button className="modal-btn back-modal-btn" onClick={onBack}>
+                ← Voltar
+              </button>
+              <button className="modal-btn restart-modal-btn" onClick={onRestart}>
+                🔄 Recomeçar
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -220,6 +230,14 @@ const Board: React.FC<BoardProps> = ({ playerColor = 'white', difficulty = 'méd
             <p className="time-message">Você não conseguiu terminar a partida a tempo.</p>
             <div className="time-stats">
               <div className="stat">
+            <div className="modal-buttons">
+              <button className="modal-btn back-modal-btn" onClick={onBack}>
+                ← Voltar
+              </button>
+              <button className="modal-btn restart-modal-btn" onClick={onRestart}>
+                🔄 Recomeçar
+              </button>
+            </div>
                 <span className="stat-label">Dificuldade:</span>
                 <span className="stat-value">{difficulty}</span>
               </div>

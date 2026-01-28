@@ -37,6 +37,12 @@ const Square: React.FC<SquareProps> = ({
           {getPieceSymbol(piece)}
         </div>
       )}
+      {isValidMove && !isCapture && (
+        <div className="move-indicator"></div>
+      )}
+      {isCapture && (
+        <div className="capture-ring"></div>
+      )}
     </div>
   );
 };
