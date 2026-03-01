@@ -1,6 +1,6 @@
-# Xadrezzz - Chess Game Frontend
+# Xadrezzz - Chess Game Frontend + Backend
 
-Um jogo de xadrez interativo desenvolvido em **React + TypeScript + Vite**.
+Um jogo de xadrez completo com frontend em **React + TypeScript + Vite** e backend em **Python + Flask**.
 
 ## 🎮 Features
 
@@ -12,98 +12,152 @@ Um jogo de xadrez interativo desenvolvido em **React + TypeScript + Vite**.
 - Promoção de peão
 - En passant
 
+✅ **IA com Múltiplos Níveis de Dificuldade**
+- **Très-fácil**: Movimentos aleatórios
+- **Fácil**: Minimax profundidade 1
+- **Médio**: Minimax profundidade 2
+- **Difícil**: Minimax profundidade 3
+- **Muito-difícil**: Minimax profundidade 4
+- **Mestre**: Minimax profundidade 5
+
 ✅ **Interface Moderna**
 - Design responsivo
 - Tabuleiro 8x8 com cores alternadas
 - Visualização clara de movimentos válidos
 - Indicadores de xeque em tempo real
 
-✅ **Funcionalidades**
-- Novo jogo
-- Desfazer movimentos
-- Histórico de movimentos
-- Detecção automática de fin de jogo
+## 🚀 Instalação e Execução
 
-## 🚀 Instalação
+### Backend (Python)
 
+1. Navegue até a pasta backend:
 ```bash
-cd chess-frontend
+cd backend
+```
+
+2. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+3. Inicie o servidor:
+```bash
+python app.py
+```
+
+O backend estará disponível em `http://localhost:5000`
+
+### Frontend (React)
+
+1. Na raiz do projeto, instale as dependências:
+```bash
 npm install
 ```
 
-## 💻 Desenvolvimento
+2. Configure a URL do backend (opcional):
+Crie um arquivo `.env` na raiz do projeto:
+```
+VITE_API_URL=http://localhost:5000
+```
 
-Para iniciar o servidor de desenvolvimento:
-
+3. Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
 
-O jogo abrirá automaticamente em `http://localhost:3000`
+O frontend abrirá automaticamente em `http://localhost:3000`
 
-## 🏗️ Build
+## 📡 API Endpoints
 
-Para criar a build de produção:
-
-```bash
-npm run build
+### Criar novo jogo
+```
+POST /api/game/new
+Response: { "game_id": "1", "board": {...} }
 ```
 
-## 📁 Estrutura do Projeto
+### Obter estado do jogo
+```
+GET /api/game/<game_id>/state
+Response: { "board": [...], "current_player": "white", ... }
+```
+
+### Fazer movimento
+```
+POST /api/game/<game_id>/move
+Body: { "from_x": 0, "from_y": 6, "to_x": 0, "to_y": 5 }
+Response: { "success": true, "board": {...} }
+```
+
+### Movimento da IA
+```
+POST /api/game/<game_id>/ai-move
+Body: { "difficulty": "médio", "ai_color": "black" }
+Response: { "success": true, "move": {...}, "board": {...} }
+```
+
+### Obter movimentos válidos
+```
+GET /api/game/<game_id>/valid-moves?x=0&y=6
+Response: { "moves": [{"x": 0, "y": 5}, ...] }
+```
+
+## 🏗️ Estrutura do Projeto
 
 ```
-src/
-├── components/
-│   ├── Board.tsx       # Componente principal do tabuleiro
-│   ├── Square.tsx      # Componente de cada casa
-│   └── Square.css      # Estilos das casas
-├── engine/
-│   └── ChessEngine.ts  # Lógica do jogo de xadrez
-├── types.ts            # Tipos TypeScript
-├── App.tsx             # Componente raiz
-├── App.css             # Estilos globais
-├── index.css           # CSS base
-└── main.tsx            # Entry point
+chess-frontend/
+├── backend/                 # Backend Python
+│   ├── chess_game.py       # Lógica do jogo de xadrez
+│   ├── chess_ai.py         # Implementação da IA
+│   ├── app.py              # API REST com Flask
+│   ├── requirements.txt    # Dependências Python
+│   └── README.md           # Documentação do backend
+├── src/
+│   ├── api/
+│   │   └── chessApi.ts     # Cliente API para comunicação com backend
+│   ├── components/
+│   │   ├── Board.tsx       # Componente principal do tabuleiro
+│   │   └── Square.tsx      # Componente de cada casa
+│   ├── engine/             # (Legado - não usado mais)
+│   ├── utils/
+│   │   └── boardConverter.ts  # Conversão entre formatos backend/frontend
+│   ├── types.ts            # Tipos TypeScript
+│   └── App.tsx             # Componente raiz
+├── package.json
+└── README.md
 ```
 
 ## 🎯 Como Jogar
 
-1. **Clique em uma peça** para selecioná-la (deve ser da cor do jogador atual)
-2. **Clique em um quadrado destacado** para mover a peça
-3. Os círculos mostram os movimentos legais
-4. Clique em **Novo Jogo** para recomeçar
-5. Pressione **ESC** para sair (em versões futuras)
-
-## 🎨 Cores do Tabuleiro
-
-- **Quadrados claros**: `#f0d9b5`
-- **Quadrados escuros**: `#b58863`
-- **Seleção**: `#baca44`
-- **Movimento válido**: Destaque amarelo
+1. **Inicie o backend** primeiro (Python)
+2. **Inicie o frontend** (React)
+3. **Clique em uma peça** para selecioná-la (deve ser da cor do jogador atual)
+4. **Clique em um quadrado destacado** para mover a peça
+5. Os círculos mostram os movimentos legais
+6. A IA joga automaticamente quando é sua vez
 
 ## 🔧 Tecnologias
 
-- **React 18** - Framework UI
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **CSS3** - Styling e animações
+### Frontend
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **CSS3**
 
-## 📝 Notas de Desenvolvimento
+### Backend
+- **Python 3.8+**
+- **Flask**: Framework web para API REST
+- **Flask-CORS**: Permite requisições do frontend
 
-A lógica do jogo está completamente implementada em `ChessEngine.ts` com:
-- Validação de movimentos legais
-- Prevenção de deixar o rei em xeque
-- Detecção de check/checkmate/stalemate
-- Suporte a todas as regras especiais do xadrez
+## 🧠 Algoritmo da IA
 
-## 🐛 Debug
+A IA utiliza o algoritmo **Minimax** com diferentes profundidades baseadas na dificuldade:
 
-Para adicionar logs de debug, modifique o arquivo `ChessEngine.ts` conforme necessário.
+- **Minimax**: Algoritmo de busca que explora todas as possíveis jogadas futuras
+- **Avaliação**: Considera material (valor das peças), controle do centro, xeque e xeque-mate
+- **Profundidade**: Quanto maior a profundidade, mais forte a IA (mas mais lenta)
 
-## 📄 Licença
+## 📝 Notas
 
-MIT
-
----
-
-Desenvolvido com ❤️ em 2026
+- O backend precisa estar rodando para o frontend funcionar
+- Os jogos são armazenados em memória (em produção, usar banco de dados)
+- A URL da API pode ser configurada via variável de ambiente `VITE_API_URL`
